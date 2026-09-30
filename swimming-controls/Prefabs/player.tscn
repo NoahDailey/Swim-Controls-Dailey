@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dg7oyisolibxw"]
+
+[ext_resource type="PackedScene" uid="uid://bei4nhkf8lwdo" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/PlayerController.tscn" id="1_y6xdh"]
+
+[node name="Player" unique_id=756966915 instance=ExtResource("1_y6xdh")]
