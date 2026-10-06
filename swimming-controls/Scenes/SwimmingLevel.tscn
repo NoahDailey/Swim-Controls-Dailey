@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://bmybixs1va8s0"]
+
+[ext_resource type="Material" uid="uid://cjnmdufilepcn" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/DarkFloorMeterByMeter.tres" id="1_ewqhl"]
+[ext_resource type="Material" uid="uid://cwtv1esx7127o" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/OrangeWallsMeterByMeter.tres" id="2_ykbw8"]
+[ext_resource type="PackedScene" uid="uid://bei4nhkf8lwdo" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/PlayerController.tscn" id="4_ci8oc"]
+[ext_resource type="PackedScene" uid="uid://ca0wevg1lb4rx" path="res://utils/WaterMaker3D/WaterMaker3D.tscn" id="4_qko5p"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ukjjn"]
+sky_top_color = Color(0.524999, 0.699586, 0.930476, 1)
+sky_horizon_color = Color(0.885751, 0.528093, 0.662718, 1)
+ground_bottom_color = Color(0.154839, 0.15629, 0.181573, 1)
+sun_angle_max = 252.28
+use_debanding = false
+
+[sub_resource type="Sky" id="Sky_j2rwf"]
+sky_material = SubResource("ProceduralSkyMaterial_ukjjn")
+
+[sub_resource type="Environment" id="Environment_aamgb"]
+background_mode = 2
+sky = SubResource("Sky_j2rwf")
+ambient_light_color = Color(0.838897, 0.838897, 0.838897, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qko5p"]
+resource_local_to_scene = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ewqhl"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_qko5p")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ykbw8"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_qko5p")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njaw6"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+depth_draw_mode = 1
+albedo_color = Color(0.30980393, 0.5411765, 0.8666667, 0.3882353)
+roughness = 0.0
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_ewqhl")
+refraction_enabled = true
+refraction_texture = SubResource("NoiseTexture2D_ykbw8")
+uv1_scale = Vector3(0.04, 0.04, 0.04)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="Swimming Level" type="Node3D" unique_id=928927757]
+
+[node name="Map" type="CSGCombiner3D" parent="." unique_id=1957341690]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Map" unique_id=1911864048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18.210205)
+use_collision = true
+size = Vector3(55, 1, 63.57959)
+material = ExtResource("1_ewqhl")
+
+[node name="PoolFloor" type="CSGBox3D" parent="Map" unique_id=1257588915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.438568, -18.134106, 15.958801)
+use_collision = true
+size = Vector3(34.34369, 1, 59.076782)
+material = ExtResource("1_ewqhl")
+
+[node name="LeftPoolSlicer" type="CSGBox3D" parent="Map" unique_id=1666458699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.694559, 0, 30.670372)
+operation = 2
+use_collision = true
+size = Vector3(31.303467, 2.5, 24.420654)
+material = ExtResource("1_ewqhl")
+
+[node name="RightPoolSlicer" type="CSGBox3D" parent="Map" unique_id=275370288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.350378, -1.9073486e-06, 1.7352266)
+operation = 2
+use_collision = true
+size = Vector3(31.036316, 2.5, 23.867493)
+material = ExtResource("1_ewqhl")
+
+[node name="WallRight4" type="CSGBox3D" parent="Map" unique_id=981463764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, -14.211288)
+use_collision = true
+size = Vector3(55, 5, 1)
+material = ExtResource("2_ykbw8")
+
+[node name="PoolWallRight" type="CSGBox3D" parent="Map" unique_id=327514978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, -7.710388, -8.6972885, -12.018038)
+use_collision = true
+size = Vector3(32.945435, 18.285126, 1)
+material = ExtResource("2_ykbw8")
+
+[node name="PoolWallLeft" type="CSGBox3D" parent="Map" unique_id=1939825306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, -7.710388, -8.6972885, 44.215725)
+use_collision = true
+size = Vector3(32.945435, 18.285126, 1)
+material = ExtResource("2_ykbw8")
+
+[node name="PoolWallCenter" type="CSGBox3D" parent="Map" unique_id=1337066935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, -7.710388, -8.599632, 15.838112)
+use_collision = true
+size = Vector3(32.945435, 18.089813, 1)
+material = ExtResource("2_ykbw8")
+
+[node name="WallLeft2" type="CSGBox3D" parent="Map" unique_id=817121575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 49)
+use_collision = true
+size = Vector3(55, 5, 1)
+material = ExtResource("2_ykbw8")
+
+[node name="WallBack" type="CSGBox3D" parent="Map" unique_id=966715433]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27, 3, 17.260986)
+use_collision = true
+size = Vector3(61.478027, 5, 1)
+material = ExtResource("2_ykbw8")
+
+[node name="PoolWallBack" type="CSGBox3D" parent="Map" unique_id=1607234811]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.437007, -9.139454, 15.685852)
+use_collision = true
+size = Vector3(58.32776, 17.333984, 1)
+material = ExtResource("2_ykbw8")
+
+[node name="PoolWallFront" type="CSGBox3D" parent="Map" unique_id=1513246954]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -23.61388, -9.139454, 15.902557)
+use_collision = true
+size = Vector3(58.76117, 17.333984, 1)
+material = ExtResource("2_ykbw8")
+
+[node name="WallFront" type="CSGBox3D" parent="Map" unique_id=1279278057]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -27, 3, 16.908203)
+use_collision = true
+size = Vector3(62.183594, 5, 1)
+material = ExtResource("2_ykbw8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=572228453]
+transform = Transform3D(0.866025, 0.402876, -0.296126, 0, 0.592253, 0.805752, 0.5, -0.697802, 0.512906, 0, 36.0983, 22.6606)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1625280097]
+environment = SubResource("Environment_aamgb")
+
+[node name="WaterMaker3D" parent="." unique_id=1747211157 instance=ExtResource("4_qko5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5525055, -9.223985, 16.038055)
+size = Vector3(31.775406, 19.00827, 54.573532)
+material = SubResource("StandardMaterial3D_njaw6")
+
+[node name="Player" parent="." unique_id=964626103 instance=ExtResource("4_ci8oc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.36634, 1, 16.120655)

@@ -30,4 +30,3 @@ public partial class LowGravityArea3D : Area3D
 		};
 	}
 }
-
