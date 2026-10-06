@@ -3,7 +3,6 @@
 [ext_resource type="Material" uid="uid://cjnmdufilepcn" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/DarkFloorMeterByMeter.tres" id="1_ewqhl"]
 [ext_resource type="Material" uid="uid://cwtv1esx7127o" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/OrangeWallsMeterByMeter.tres" id="2_ykbw8"]
 [ext_resource type="PackedScene" uid="uid://bei4nhkf8lwdo" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/PlayerController.tscn" id="4_ci8oc"]
-[ext_resource type="PackedScene" uid="uid://ca0wevg1lb4rx" path="res://utils/WaterMaker3D/WaterMaker3D.tscn" id="4_qko5p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ukjjn"]
 sky_top_color = Color(0.524999, 0.699586, 0.930476, 1)
@@ -22,35 +21,11 @@ ambient_light_color = Color(0.838897, 0.838897, 0.838897, 1)
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_qko5p"]
-resource_local_to_scene = true
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgq27"]
+albedo_color = Color(0.3152072, 0.6051168, 0.75002563, 0.85882354)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ewqhl"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_qko5p"]
 resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_qko5p")
-seamless = true
-as_normal_map = true
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ykbw8"]
-resource_local_to_scene = true
-noise = SubResource("FastNoiseLite_qko5p")
-seamless = true
-as_normal_map = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njaw6"]
-resource_local_to_scene = true
-transparency = 1
-cull_mode = 2
-depth_draw_mode = 1
-albedo_color = Color(0.30980393, 0.5411765, 0.8666667, 0.3882353)
-roughness = 0.0
-normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_ewqhl")
-refraction_enabled = true
-refraction_texture = SubResource("NoiseTexture2D_ykbw8")
-uv1_scale = Vector3(0.04, 0.04, 0.04)
-uv1_triplanar = true
-uv1_world_triplanar = true
 
 [node name="Swimming Level" type="Node3D" unique_id=928927757]
 
@@ -144,10 +119,17 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1625280097]
 environment = SubResource("Environment_aamgb")
 
-[node name="WaterMaker3D" parent="." unique_id=1747211157 instance=ExtResource("4_qko5p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5525055, -9.223985, 16.038055)
-size = Vector3(31.775406, 19.00827, 54.573532)
-material = SubResource("StandardMaterial3D_njaw6")
+[node name="Water" type="CSGBox3D" parent="." unique_id=1668831690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4581833, -8.838989, 17.138058)
+size = Vector3(32.315628, 17.764893, 55.341347)
+material = SubResource("StandardMaterial3D_fgq27")
+
+[node name="Area3D" type="Area3D" parent="Water" unique_id=105438809 groups=["water_area"]]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/Area3D" unique_id=1589153797]
+unique_name_in_owner = true
+shape = SubResource("BoxShape3D_qko5p")
 
 [node name="Player" parent="." unique_id=964626103 instance=ExtResource("4_ci8oc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.36634, 1, 16.120655)
