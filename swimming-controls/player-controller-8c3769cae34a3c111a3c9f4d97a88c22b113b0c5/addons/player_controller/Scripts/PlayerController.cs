@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Godot;
 
 namespace PolarBears.PlayerControllerAddon;
@@ -378,14 +378,14 @@ public partial class PlayerController : CharacterBody3D
 		{
 			previousKeyStates.Remove(key);
 		}
-    
+	
 		return currentState && !wasPressed;
 	}
 
 	private bool IsInputPressed(string inputAction, Key fallbackKey, bool justPressed = false)
 	{
 		bool inputActionSet = !string.IsNullOrEmpty(inputAction);
-    
+	
 		if (justPressed)
 		{
 			return (

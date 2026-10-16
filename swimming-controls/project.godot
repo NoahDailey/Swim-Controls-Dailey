@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Swimming Controls"
-run/main_scene="uid://b6o2duldyegl3"
+run/main_scene="uid://bmybixs1va8s0"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

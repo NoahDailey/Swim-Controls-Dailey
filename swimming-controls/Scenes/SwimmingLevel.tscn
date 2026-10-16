@@ -3,6 +3,7 @@
 [ext_resource type="Material" uid="uid://cjnmdufilepcn" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/DarkFloorMeterByMeter.tres" id="1_ewqhl"]
 [ext_resource type="Material" uid="uid://cwtv1esx7127o" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/OrangeWallsMeterByMeter.tres" id="2_ykbw8"]
 [ext_resource type="PackedScene" uid="uid://bei4nhkf8lwdo" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/PlayerController.tscn" id="4_ci8oc"]
+[ext_resource type="Script" uid="uid://dq3w7kwsnpuqi" path="res://Scripts/WaterArea3D.cs" id="4_qko5p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ukjjn"]
 sky_top_color = Color(0.524999, 0.699586, 0.930476, 1)
@@ -30,6 +31,7 @@ resource_local_to_scene = true
 [node name="Swimming Level" type="Node3D" unique_id=928927757]
 
 [node name="Map" type="CSGCombiner3D" parent="." unique_id=1957341690]
+layers = 3
 use_collision = true
 
 [node name="Floor" type="CSGBox3D" parent="Map" unique_id=1911864048]
@@ -39,23 +41,16 @@ size = Vector3(55, 1, 63.57959)
 material = ExtResource("1_ewqhl")
 
 [node name="PoolFloor" type="CSGBox3D" parent="Map" unique_id=1257588915]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.438568, -18.134106, 15.958801)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.438568, -18.134106, 16.915253)
 use_collision = true
-size = Vector3(34.34369, 1, 59.076782)
+size = Vector3(34.34369, 1, 57.16388)
 material = ExtResource("1_ewqhl")
 
 [node name="LeftPoolSlicer" type="CSGBox3D" parent="Map" unique_id=1666458699]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.694559, 0, 30.670372)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.694559, 0, 16.812263)
 operation = 2
 use_collision = true
-size = Vector3(31.303467, 2.5, 24.420654)
-material = ExtResource("1_ewqhl")
-
-[node name="RightPoolSlicer" type="CSGBox3D" parent="Map" unique_id=275370288]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.350378, -1.9073486e-06, 1.7352266)
-operation = 2
-use_collision = true
-size = Vector3(31.036316, 2.5, 23.867493)
+size = Vector3(31.303467, 2.5, 52.16458)
 material = ExtResource("1_ewqhl")
 
 [node name="WallRight4" type="CSGBox3D" parent="Map" unique_id=981463764]
@@ -65,21 +60,15 @@ size = Vector3(55, 5, 1)
 material = ExtResource("2_ykbw8")
 
 [node name="PoolWallRight" type="CSGBox3D" parent="Map" unique_id=327514978]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, -7.710388, -8.6972885, -12.018038)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, -7.710388, -8.6972885, -10.542306)
 use_collision = true
 size = Vector3(32.945435, 18.285126, 1)
 material = ExtResource("2_ykbw8")
 
 [node name="PoolWallLeft" type="CSGBox3D" parent="Map" unique_id=1939825306]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, -7.710388, -8.6972885, 44.215725)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, -7.710388, -8.6972885, 44.144924)
 use_collision = true
-size = Vector3(32.945435, 18.285126, 1)
-material = ExtResource("2_ykbw8")
-
-[node name="PoolWallCenter" type="CSGBox3D" parent="Map" unique_id=1337066935]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2, -7.710388, -8.599632, 15.838112)
-use_collision = true
-size = Vector3(32.945435, 18.089813, 1)
+size = Vector3(32.945435, 18.285126, 1.0708008)
 material = ExtResource("2_ykbw8")
 
 [node name="WallLeft2" type="CSGBox3D" parent="Map" unique_id=817121575]
@@ -95,15 +84,15 @@ size = Vector3(61.478027, 5, 1)
 material = ExtResource("2_ykbw8")
 
 [node name="PoolWallBack" type="CSGBox3D" parent="Map" unique_id=1607234811]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.437007, -9.139454, 15.685852)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.437007, -9.139454, 16.65207)
 use_collision = true
-size = Vector3(58.32776, 17.333984, 1)
+size = Vector3(56.395325, 17.333984, 1)
 material = ExtResource("2_ykbw8")
 
 [node name="PoolWallFront" type="CSGBox3D" parent="Map" unique_id=1513246954]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -23.61388, -9.139454, 15.902557)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -23.61388, -9.139454, 16.8553)
 use_collision = true
-size = Vector3(58.76117, 17.333984, 1)
+size = Vector3(56.855682, 17.333984, 1)
 material = ExtResource("2_ykbw8")
 
 [node name="WallFront" type="CSGBox3D" parent="Map" unique_id=1279278057]
@@ -119,17 +108,28 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1625280097]
 environment = SubResource("Environment_aamgb")
 
-[node name="Water" type="CSGBox3D" parent="." unique_id=1668831690]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4581833, -8.838989, 17.138058)
-size = Vector3(32.315628, 17.764893, 55.341347)
-material = SubResource("StandardMaterial3D_fgq27")
-
-[node name="Area3D" type="Area3D" parent="Water" unique_id=105438809 groups=["water_area"]]
-unique_name_in_owner = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/Area3D" unique_id=1589153797]
-unique_name_in_owner = true
-shape = SubResource("BoxShape3D_qko5p")
-
 [node name="Player" parent="." unique_id=964626103 instance=ExtResource("4_ci8oc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.36634, 1, 16.120655)
+collision_layer = 3
+
+[node name="Water" type="CSGBox3D" parent="." unique_id=291515244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6580954, -8.715637, 16.779472)
+use_collision = true
+collision_layer = 2
+collision_mask = 2
+size = Vector3(31.01275, 17.518188, 52.44764)
+material = SubResource("StandardMaterial3D_fgq27")
+
+[node name="WaterArea3D" type="Area3D" parent="Water" unique_id=1919555099 node_paths=PackedStringArray("player") groups=["water_area"]]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_qko5p")
+player = NodePath("../../Player")
+swimSpeed = 5.0
+verticalSwimSpeed = 5.0
+waterDrag = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/WaterArea3D" unique_id=1308681536]
+unique_name_in_owner = true
+shape = SubResource("BoxShape3D_qko5p")
