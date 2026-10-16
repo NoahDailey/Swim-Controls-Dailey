@@ -1,62 +1,45 @@
-using System.Collections.Generic;
 using Godot;
+using System;
 
+// Script that keeps track of which movement scheme to use
 public partial class WaterArea3D : Area3D
 {
 	[Export]
 	public CharacterBody3D player;
-	
+
+	// Strings for the scripts to go under
+	[ExportGroup("File Paths")]
 	[Export]
-	public float swimSpeed;
+	public string swimmingScriptPath = "res://Scripts/SwimmingController.cs";
 	[Export]
-	public float verticalSwimSpeed;
-	[Export]
-	public float waterDrag;
-	
-	private bool isSwimming;
-	
+	public string mainPlayerScriptPath = "res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Scripts/PlayerController.cs";
+
+	// Things to do upon startup of the game
 	public override void _Ready()
 	{
 		BodyEntered += OnBodyEntered;
 		BodyExited += OnBodyExited;
 	}
-	
-	public override void _PhysicsProcess(double delta)
-	{
-		if(!isSwimming || player == null)
-			return;
-		
-		Vector2 input = Input.GetVector("left", "right", "up", "down");
-		Vector3 direction =  player.GlobalBasis.X * input.X + -player.GlobalBasis.Z * input.Y;
-		direction = direction.Normalized();
-		
-		float verticalInput = 0.0f;
-		if(Input.IsActionPressed("swim_up"))
-			verticalInput += 1.0f;
-		if(Input.IsActionPressed("swim_down"))
-			verticalInput -= 1.0f;
-		
-		Vector3 targetVelocity = direction * swimSpeed + Vector3.Up * (verticalInput * verticalSwimSpeed);
-		player.Velocity = player.Velocity.MoveToward(targetVelocity, waterDrag * (float)delta);
-		
-		player.MoveAndSlide();
-	}
-	
+
 	private void OnBodyEntered(Node3D body)
 	{
-		if(player == null || body != player)
-			return;
-		
-		isSwimming = true;
-		player.SetPhysicsProcess(false);
+		GD.Print($"Detected: {body.Name}; expected player: {player?.Name}");
+		if(body == player)
+		{
+			var swimmingScript = GD.Load(swimmingScriptPath);
+			body.SetScript(swimmingScript);
+			GD.Print("Switching to Swimming");
+		}
 	}
-	
+
 	private void OnBodyExited(Node3D body)
 	{
-		if(player == null || body != player)
-			return;
-		
-		isSwimming = false;
-		player.SetPhysicsProcess(true);
+		GD.Print($"Detected: {body.Name}; expected player: {player?.Name}");
+		if(body == player)
+		{
+			var mainPlayerScript = GD.Load(mainPlayerScriptPath);
+			body.SetScript(mainPlayerScript);
+			GD.Print("Switching to Regular Movement");
+		}
 	}
 }
