@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://g8idirw62qe0" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Scripts/Bobbing.cs" id="10_7wk1w"]
 [ext_resource type="Script" uid="uid://c6bx47wr7fbdm" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Scripts/Mouse.cs" id="11_huhen"]
 [ext_resource type="Script" uid="uid://b6k73aj5povgv" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Scripts/FieldOfView.cs" id="12_m2mxi"]
+[ext_resource type="Script" uid="uid://bqwjllyhew4cv" path="res://Scripts/SwimmingController.cs" id="13_7n832"]
 [ext_resource type="Script" uid="uid://bt8flen3mi28r" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Scripts/AnimationPlayer.cs" id="13_vnh4e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xc2g5"]
@@ -197,6 +198,10 @@ script = ExtResource("11_huhen")
 
 [node name="FieldOfView" type="Node3D" parent="." unique_id=398664853]
 script = ExtResource("12_m2mxi")
+
+[node name="SwimmingController" type="Node3D" parent="." unique_id=1164704354 node_paths=PackedStringArray("player")]
+script = ExtResource("13_7n832")
+player = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=770752589]
 libraries/ = SubResource("AnimationLibrary_vd0e2")

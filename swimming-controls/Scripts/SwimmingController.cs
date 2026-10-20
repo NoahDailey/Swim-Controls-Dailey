@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using Godot;
-using System;
 
 public partial class SwimmingController : Node3D
 {
@@ -11,8 +11,6 @@ public partial class SwimmingController : Node3D
 	[ExportGroup("Movement Values")]
 	[Export(PropertyHint.Range, "0,20,0.1,or_greater")]
 	public float swimSpeed             { get; set; } = 2.0f;
-	[Export(PropertyHint.Range, "0,20,0.1,or_greater")]
-	public float sprintSwimSpeed             { get; set; } = 3.5f;
 	[Export(PropertyHint.Range, "0,20,0.1,or_greater")]
 	public float verticalSwimSpeed             { get; set; } = 3.0f;
 	[Export(PropertyHint.Range, "0,20,0.1,or_greater")]
@@ -26,7 +24,6 @@ public partial class SwimmingController : Node3D
 	[Export] public string strafeRight;
 	[Export] public string swimUp;
 	[Export] public string swimDown;
-	[Export] public string sprint;
 	
 	// gravity required for proper differences in world
 	private float gravity;
@@ -34,7 +31,7 @@ public partial class SwimmingController : Node3D
 	public override void _Ready()
 	{
 		// Get access to the player head for movement and set the gravity
-		playerHead = (Node3D)player.GetChild(3);
+		playerHead = (Node3D)player.GetChild(2);
 		gravity = (float)ProjectSettings.GetSetting("physics/3d/default_gravity");
 	}
 	

@@ -3,7 +3,6 @@
 [ext_resource type="Material" uid="uid://cjnmdufilepcn" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/DarkFloorMeterByMeter.tres" id="1_ewqhl"]
 [ext_resource type="Material" uid="uid://cwtv1esx7127o" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/OrangeWallsMeterByMeter.tres" id="2_ykbw8"]
 [ext_resource type="PackedScene" uid="uid://bei4nhkf8lwdo" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/PlayerController.tscn" id="4_ci8oc"]
-[ext_resource type="Script" uid="uid://bqwjllyhew4cv" path="res://Scripts/SwimmingController.cs" id="4_ewqhl"]
 [ext_resource type="Script" uid="uid://dq3w7kwsnpuqi" path="res://Scripts/WaterArea3D.cs" id="4_qko5p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ukjjn"]
@@ -125,10 +124,6 @@ environment = SubResource("Environment_aamgb")
 [node name="Player" parent="." unique_id=964626103 instance=ExtResource("4_ci8oc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.36634, 1, 16.120655)
 collision_layer = 3
-
-[node name="SwimmingController" type="Node3D" parent="Player" unique_id=1230963484 node_paths=PackedStringArray("player")]
-script = ExtResource("4_ewqhl")
-player = NodePath("..")
 
 [node name="EdgePool" type="CSGBox3D" parent="." unique_id=291515244]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.074997, -5.240631, 11.191035)

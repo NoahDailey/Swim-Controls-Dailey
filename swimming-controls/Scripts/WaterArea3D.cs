@@ -7,12 +7,16 @@ namespace PolarBears.PlayerControllerAddon;
 public partial class WaterArea3D : Area3D
 {
 	[Export] public CharacterBody3D player;
+	[Export] public Node3D swimmingController;
 	public PlayerController playerScript;
 	public SwimmingController swimmingScript;
 
 	// Things to do upon startup of the game
 	public override void _Ready()
 	{
+		// Get the swimmingController
+		swimmingController = (Node3D)player.GetChild(12);
+		
 		// Get access to the two scripts
 		playerScript = GetNode<PlayerController>("../../Player");
 		swimmingScript = GetNode<SwimmingController>("../../Player/SwimmingController");
@@ -39,7 +43,7 @@ public partial class WaterArea3D : Area3D
 		if(body == player)
 		{
 			playerScript.SetPhysicsProcess(true);
-		swimmingScript.SetPhysicsProcess(false);
+			swimmingScript.SetPhysicsProcess(false);
 		} 
 	}
 }
