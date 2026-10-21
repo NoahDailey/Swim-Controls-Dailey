@@ -3,6 +3,7 @@
 [ext_resource type="Material" uid="uid://cjnmdufilepcn" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/DarkFloorMeterByMeter.tres" id="1_ewqhl"]
 [ext_resource type="Material" uid="uid://cwtv1esx7127o" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/Examples/Assets/Materials/OrangeWallsMeterByMeter.tres" id="2_ykbw8"]
 [ext_resource type="PackedScene" uid="uid://bei4nhkf8lwdo" path="res://player-controller-8c3769cae34a3c111a3c9f4d97a88c22b113b0c5/addons/player_controller/PlayerController.tscn" id="4_ci8oc"]
+[ext_resource type="Shader" uid="uid://c4tmirgrt5s71" path="res://Prefabs/Shaders/WaterShader.gdshader" id="4_ewqhl"]
 [ext_resource type="Script" uid="uid://dq3w7kwsnpuqi" path="res://Scripts/WaterArea3D.cs" id="4_qko5p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ukjjn"]
@@ -22,12 +23,69 @@ ambient_light_color = Color(0.838897, 0.838897, 0.838897, 1)
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgq27"]
-albedo_color = Color(0.3152072, 0.6051168, 0.75002563, 0.85882354)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rfldb"]
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ci8oc"]
+noise = SubResource("FastNoiseLite_rfldb")
+in_3d_space = true
+as_normal_map = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h2kca"]
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g021j"]
+noise = SubResource("FastNoiseLite_h2kca")
+in_3d_space = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2l13r"]
+render_priority = 0
+shader = ExtResource("4_ewqhl")
+shader_parameter/water_color = Color(0.60773075, 0.7368385, 1, 1)
+shader_parameter/water_noise_1 = SubResource("NoiseTexture2D_ci8oc")
+shader_parameter/water_noise_2 = SubResource("NoiseTexture2D_g021j")
+shader_parameter/depth_distance = 3.0
+shader_parameter/water_color_ratio = 0.5000000074506
+shader_parameter/beers_law = 1.40000002086168
+shader_parameter/normal_scale = 0.5
+shader_parameter/roughness_scale = 0.2
+shader_parameter/time_scale = 5.0
+shader_parameter/uv_scale = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qko5p"]
 resource_local_to_scene = true
-size = Vector3(31.33583, 10.708984, 49.988037)
+size = Vector3(31.33583, 10.708984, 47.967606)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wqoo5"]
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lft78"]
+noise = SubResource("FastNoiseLite_wqoo5")
+in_3d_space = true
+as_normal_map = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nmdiy"]
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_suwap"]
+noise = SubResource("FastNoiseLite_nmdiy")
+in_3d_space = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slbas"]
+render_priority = 0
+shader = ExtResource("4_ewqhl")
+shader_parameter/water_color = Color(0.60784316, 0.7372549, 1, 1)
+shader_parameter/water_noise_1 = SubResource("NoiseTexture2D_lft78")
+shader_parameter/water_noise_2 = SubResource("NoiseTexture2D_suwap")
+shader_parameter/depth_distance = 3.0
+shader_parameter/water_color_ratio = 0.5
+shader_parameter/beers_law = 1.40000002086168
+shader_parameter/normal_scale = 0.5
+shader_parameter/roughness_scale = 0.2
+shader_parameter/time_scale = 5.0
+shader_parameter/uv_scale = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fgq27"]
 size = Vector3(30.288101, 17.942627, 39.208984)
@@ -44,9 +102,9 @@ size = Vector3(55, 1, 63.57959)
 material = ExtResource("1_ewqhl")
 
 [node name="EdgePoolFloor" type="CSGBox3D" parent="Map" unique_id=2103584739]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.863907, -10.036037, 10.582409)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.816177, -10.036037, 10.582409)
 use_collision = true
-size = Vector3(28.912598, 1, 47.792786)
+size = Vector3(31.008057, 1, 47.792786)
 material = ExtResource("1_ewqhl")
 
 [node name="PoolFloor" type="CSGBox3D" parent="Map" unique_id=1257588915]
@@ -126,12 +184,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.36634, 1, 16.120655)
 collision_layer = 3
 
 [node name="EdgePool" type="CSGBox3D" parent="." unique_id=291515244]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.074997, -5.240631, 11.191035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.074997, -5.240631, 10.736543)
 use_collision = true
 collision_layer = 2
 collision_mask = 2
-size = Vector3(31.01275, 10.568176, 48.007164)
-material = SubResource("StandardMaterial3D_fgq27")
+size = Vector3(31.01275, 10.568176, 48.192883)
+material = SubResource("ShaderMaterial_2l13r")
 
 [node name="WaterArea3D" type="Area3D" parent="EdgePool" unique_id=1919555099 node_paths=PackedStringArray("player")]
 disable_mode = 2
@@ -141,6 +199,7 @@ script = ExtResource("4_qko5p")
 player = NodePath("../../Player")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EdgePool/WaterArea3D" unique_id=1308681536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.13669586)
 shape = SubResource("BoxShape3D_qko5p")
 
 [node name="TestPool" type="CSGBox3D" parent="." unique_id=1570158581]
@@ -149,7 +208,7 @@ use_collision = true
 collision_layer = 2
 collision_mask = 2
 size = Vector3(31.01275, 17.717102, 35.48505)
-material = SubResource("StandardMaterial3D_fgq27")
+material = SubResource("ShaderMaterial_slbas")
 
 [node name="WaterArea3D" type="Area3D" parent="TestPool" unique_id=1142706821 node_paths=PackedStringArray("player")]
 disable_mode = 2
