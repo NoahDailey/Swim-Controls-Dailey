@@ -7,6 +7,7 @@ namespace PolarBears.PlayerControllerAddon;
 public partial class WaterArea3D : Area3D
 {
 	[Export] public CharacterBody3D player;
+	//[Export] public Node3D playerHead;
 	[Export] public Node3D swimmingController;
 	public PlayerController playerScript;
 	public SwimmingController swimmingScript;
@@ -14,7 +15,8 @@ public partial class WaterArea3D : Area3D
 	// Things to do upon startup of the game
 	public override void _Ready()
 	{
-		// Get the swimmingController
+		// Get the swimmingController and playerHead
+		//playerHead = (Node3D)player.GetChild(2);
 		swimmingController = (Node3D)player.GetChild(12);
 		
 		// Get access to the two scripts
